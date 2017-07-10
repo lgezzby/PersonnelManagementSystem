@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjgsu.dao.UserDao">
+    <select id="selectByUsernameAndPassword" resultType="User">
+        SELECT * FROM user_inf WHERE loginname = #{loginname} AND password = #{password}
+    </select>
+
+    <select id="selectById" resultType="User">
+        SELECT * FROM user_inf WHERE id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM user_inf WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE user_inf
+        <set>
+            <if test="user.username != null and !user.username.equals('')">
+                username = #{user.username},
+            </if>
+            <if test="user.loginname != null and !user.loginname.equals('')">
+                loginname = #{user.loginname},
+            </if>
+            <if test="user.password != null and !user.password.equals('')">
+                password = #{user.password},
+            </if>
+            <if test="user.status != null and !user.status.equals('')">
+                status = #{user.status},
+            </if>
+            <if test="user.createDate != null and !user.createDate.equals('')">
+                create_date = #{user.createDate},
+            </if>
+        </set>
+
+        <where>
+            id = #{user.id}
+        </where>
+    </update>
+
+    <select id="selectByPage" parameterType="java.util.Map" resultType="User">
+        SELECT * FROM user_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="Integer">
+        SELECT count(*) FROM user_inf
+        <if test="user!=null">
+            <where>
+            <if test="user.username !=null and !user.username.equals('')">
+                <bind name="patternUsername" value="'%' + user.username + '%'" />
+                AND username LIKE #{patternUsername}
+            </if>
+            <if test="user.status !=null">
+                AND status = #{user.status}
+            </if>
+            </where>
+        </if>
+    </select>
+
+    <insert id="save" parameterType="User">
+        INSERT INTO user_inf <include refid="insertUserSet"/>
+    </insert>
+
+    <sql id="insertUserSet">
+        <set>
+            <if test= "user.username != null">
+                username=#{user.username},
+            </if >
+            <if test= "user.status != null">
+                status=#{user.status},
+            </if >
+            <if test= "user.loginname != null">
+                loginname=#{user.loginname},
+            </if >
+            <if test= "user.password != null">
+                password=#{user.password},
+            </if >
+        </set>
+    </sql>
+</mapper>

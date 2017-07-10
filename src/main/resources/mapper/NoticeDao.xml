@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjgsu.dao.NoticeDao">
+
+    <select id="selectById" resultMap="selectRetNotice">
+        SELECT * FROM notice_inf WHERE id = #{id}
+    </select>
+
+    <resultMap id="selectRetNotice" type="Notice">
+        <id property="id" column="id"/>
+        <result property="createDate" column="create_date"/>
+        <association property="user" column="user_id" fetchType="eager" javaType="User" select="com.zjgsu.dao.UserDao.selectById">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+            <result property="loginname" column="loginname"/>
+            <result property="password" column="password"/>
+            <result property="status" column="status"/>
+            <result property="createDate" column="create_date"/>
+        </association>
+    </resultMap>
+
+    <delete id="deleteById">
+        DELETE FROM notice_inf WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE notice_inf
+        <include refid="insertNoticeSet"/>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="selectByPage" parameterType="java.util.Map" resultType="Notice">
+        SELECT * FROM notice_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="Integer">
+        SELECT count(*) FROM notice_inf
+        <if test="param != null">
+            <where>
+                <bind name="patternNotice" value="param.notice" />
+                <if test="patternNotice.title !=null and !patternNotice.title.equals('')">
+                    <bind name="patternTitle" value="'%' + #{patternNotice.title} + '%'" />
+                    AND title LIKE #{patternNotice.title}
+                </if>
+                <if test="patternNotice.content !=null and !patternNotice.content.equals('')">
+                    <bind name="patternContent" value="'%' + #{patternNotice.content} + '%'" />
+                    AND content LIKE #{patternNotice.content}
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <insert id="save">
+        INSERT INTO notice_inf <include refid="insertNoticeSet"/>
+    </insert>
+
+    <sql id="insertNoticeSet">
+        <set>
+            <if test= "title != null and !title.equals('')">
+                title=#{title},
+            </if >
+            <if test= "content != null and !content.equals('')">
+                content=#{content},
+            </if >
+            <if test= "user != null and user.id != null">
+                user_id=#{user.id},
+            </if >
+        </set>
+    </sql>
+</mapper>

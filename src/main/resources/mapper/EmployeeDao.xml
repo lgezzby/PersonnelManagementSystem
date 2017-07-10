@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjgsu.dao.EmployeeDao">
+
+    <select id="selectById" resultMap="selectRetEmployee">
+        SELECT * FROM employee_inf WHERE id = #{id}
+    </select>
+
+    <resultMap id="selectRetEmployee" type="Employee">
+        <id property="id" column="id"/>
+        <result property="cardId" column="card_id"/>
+        <result property="postCode" column="post_code"/>
+        <result property="qqNum" column="qq_num"/>
+        <result property="birthday" column="birthday"/>
+        <result property="createDate" column="create_date"/>
+        <association property="dept" column="dept_id" fetchType="eager" javaType="Dept" select="com.zjgsu.dao.DeptDao.selectById">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="remark" column="remark"/>
+        </association>
+        <association property="job" column="job_id" fetchType="eager" javaType="Job" select="com.zjgsu.dao.JobDao.selectById">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="remark" column="remark"/>
+        </association>
+    </resultMap>
+
+    <delete id="deleteById">
+        DELETE FROM employee_inf WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE employee_inf
+        <include refid="insertEmployeeSet"/>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="selectByPage" parameterType="java.util.Map" resultType="Employee">
+        SELECT * FROM employee_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="Integer">
+        SELECT count(*) FROM employee_inf
+        <if test="param != null">
+            <where>
+                <bind name="patternEmployee" value="param.employee" />
+                <if test="patternEmployee.dept !=null and patternEmployee.dept.id != null and patternEmployee.dept.id != 0">
+                    AND dept_id = #{patternEmployee.dept.id}
+                </if>
+                <if test="patternEmployee.job !=null and patternEmployee.job.id != null and patternEmployee.job.id != 0">
+                    AND job_id = #{patternEmployee.job.id}
+                </if>
+                <if test="patternEmployee.name !=null and !patternEmployee.name.equals('')">
+                    <bind name="patternName" value=" '%' + patternEmployee.name + '%' "/>
+                    AND name LIKE #{patternName}
+                </if>
+                <if test="patternEmployee.phone !=null and !patternEmployee.phone.equals('')">
+                    <bind name="patternPhone" value=" '%' + patternEmployee.phone + '%' "/>
+                    AND phone LIKE #{patternPhone}
+                </if>
+                <if test="patternEmployee.cardId !=null and !patternEmployee.cardId.equals('')">
+                    <bind name="patternCardId" value=" '%' + patternEmployee.cardId + '%' "/>
+                    AND card_id LIKE #{patternCardId}
+                </if>
+                <if test="patternEmployee.sex !=null and patternEmployee.sex != 0">
+                    AND sex = #{patternEmployee.sex}
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <insert id="save">
+        INSERT INTO employee_inf <include refid="insertEmployeeSet"/>
+    </insert>
+
+    <sql id="insertEmployeeSet">
+        <set>
+            <if test= "name != null">
+                name=#{name},
+            </if >
+            <if test= "cardId != null">
+                card_id=#{cardId},
+            </if >
+            <if test= "address != null">
+                address=#{address},
+            </if >
+            <if test= "postCode != null">
+                post_code=#{postCode},
+            </if >
+            <if test= "tel != null">
+                tel=#{tel},
+            </if >
+            <if test= "phone != null">
+                phone=#{phone},
+            </if >
+            <if test= "qqNum != null">
+                qq_num=#{qqNum},
+            </if >
+            <if test= "email != null">
+                email=#{email},
+            </if >
+            <if test= "sex != null">
+                sex=#{sex},
+            </if >
+            <if test= "party != null">
+                party=#{party},
+            </if >
+            <if test= "birthday != null">
+                birthday=#{birthday},
+            </if >
+            <if test= "race != null">
+                race=#{race},
+            </if >
+            <if test= "education != null">
+                education=#{education},
+            </if >
+            <if test= "speciality != null">
+                speciality=#{speciality},
+            </if >
+            <if test= "hobby != null">
+                hobby=#{hobby},
+            </if >
+            <if test= "remark != null">
+                remark=#{remark},
+            </if >
+            <if test= "createDate != null">
+                create_date=#{createDate},
+            </if >
+            <if test= "dept != null">
+                dept_id=#{dept.id},
+            </if >
+            <if test= "job != null">
+                job_id=#{job.id},
+            </if >
+        </set>
+    </sql>
+</mapper>

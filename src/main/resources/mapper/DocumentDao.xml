@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjgsu.dao.DocumentDao">
+
+    <select id="selectById" resultType="Document">
+        SELECT * FROM document_inf WHERE id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM document_inf WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE document_inf
+        <include refid="insertDocumentSet"/>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="selectByPage" parameterType="java.util.Map" resultType="Document">
+        SELECT * FROM document_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="Integer">
+        SELECT count(*) FROM document_inf
+        <if test="param != null">
+            <where>
+                <bind name="patternDocument" value="param.document" />
+                <if test="patternDocument.title !=null and !patternDocument.title.equals('')">
+                    <bind name="patternTitle" value="'%' + #{patternDocument.title} + '%'" />
+                    AND title LIKE #{patternDocument.title}
+                </if>
+            </where>
+        </if>
+    </select>
+
+    <insert id="save">
+        INSERT INTO document_inf <include refid="insertDocumentSet"/>
+    </insert>
+
+    <sql id="insertDocumentSet">
+        <set>
+            <if test= "title != null and !title.equals('')">
+                title=#{title},
+            </if >
+            <if test= "filename != null and !filename.equals('')">
+                filename=#{filename},
+            </if >
+            <if test= "remark != null and !remark.equals('')">
+                remark=#{remark},
+            </if >
+            <if test= "user != null and user.id != null">
+                user_id=#{user.id},
+            </if >
+        </set>
+    </sql>
+</mapper>

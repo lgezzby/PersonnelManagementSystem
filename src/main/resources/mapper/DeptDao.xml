@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjgsu.dao.DeptDao">
+    <select id="selectAllDept" resultType="Dept">
+        SELECT * FROM dept_inf
+    </select>
+
+    <select id="selectById" resultType="Dept">
+        SELECT * FROM dept_inf WHERE id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM dept_inf WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE dept_inf
+        <set>
+            <if test="dept.name != null and !dept.name.equals('')">
+                name = #{dept.name},
+            </if>
+            <if test="dept.remark != null and !dept.remark.equals('')">
+                remark = #{dept.remark},
+            </if>
+        </set>
+
+        <where>
+            id = #{dept.id}
+        </where>
+    </update>
+
+    <select id="selectByPage" parameterType="java.util.Map" resultType="Dept">
+        SELECT * FROM dept_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    </select>
+
+    <select id="count" parameterType="java.util.Map" resultType="Integer">
+        SELECT count(*) FROM dept_inf
+        <if test="param.dept!=null">
+            <where>
+            <if test="param.dept.name !=null and !param.dept.name.equals('')">
+                <bind name="patternName" value="'%' + param.dept.name + '%'" />
+                AND name LIKE #{patternName}
+            </if>
+            </where>
+        </if>
+    </select>
+
+    <insert id="save">
+        INSERT INTO dept_inf <include refid="insertDeptSet"/>
+    </insert>
+
+    <sql id="insertDeptSet">
+        <set>
+            <if test= "name != null and !name.equals('')">
+                name=#{name},
+            </if >
+            <if test= "remark != null and !remark.equals('')">
+                remark=#{remark},
+            </if >
+        </set>
+    </sql>
+</mapper>
