@@ -18,4 +18,39 @@
     <servlet-name>PersonnelManagementSystem</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <!-- 编码过滤器 -->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- JSP配置 -->
+  <jsp-config>
+    <jsp-property-group>
+      <!-- 拦截所有jsp -->
+      <url-pattern>*.jsp</url-pattern>
+      <!-- 可以使用el表达式 -->
+      <el-ignored>false</el-ignored>
+      <!-- 不能再页面中使用java脚本 -->
+      <scripting-invalid>true</scripting-invalid>
+      <!-- 给所有jsp页面导入要依赖的库 -->
+      <include-prelude>/WEB-INF/jsp/taglib.jsp</include-prelude>
+    </jsp-property-group>
+  </jsp-config>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/404.html</location>
+  </error-page>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 </web-app>

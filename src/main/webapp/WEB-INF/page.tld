@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1">
+    <!-- 描述自定义标签版本 -->
+    <description>Pager 1.0 core library</description>
+    <!-- 显示名称 导包进行的一个展示-->
+    <display-name>Pager core</display-name>
+    <tlib-version>1.0</tlib-version>
+    <!-- 短名 -->
+    <short-name>zjgsu</short-name>
+    <!-- uri:导包 -->
+    <uri>/pager-tags</uri>
+    <!-- 定义一个标签 -->
+    <tag>
+        <name>pager</name>
+        <tag-class>com.zjgsu.util.tag.PagerTag</tag-class>
+        <body-content>empty</body-content>
+
+        <!-- 定义标签属性 -->
+        <attribute>
+            <!-- 表示分页的第几页 -->
+            <name>pageIndex</name>
+            <!-- 必须的 -->
+            <required>true</required>
+            <!-- 支持EL表达式 -->
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>pageSize</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>recordCount</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>submitUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>style</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>
+    

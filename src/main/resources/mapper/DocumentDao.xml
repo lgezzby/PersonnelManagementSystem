@@ -8,6 +8,19 @@
         SELECT * FROM document_inf WHERE id = #{id}
     </select>
 
+    <resultMap id="selectRetDocument" type="Document">
+        <id property="id" column="id"/>
+        <result property="createDate" column="create_date"/>
+        <association property="user" column="user_id" fetchType="eager" javaType="User" select="com.zjgsu.dao.UserDao.selectById">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+            <result property="loginname" column="loginname"/>
+            <result property="password" column="password"/>
+            <result property="status" column="status"/>
+            <result property="createDate" column="create_date"/>
+        </association>
+    </resultMap>
+
     <delete id="deleteById">
         DELETE FROM document_inf WHERE id = #{id}
     </delete>

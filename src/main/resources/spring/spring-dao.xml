@@ -18,8 +18,10 @@
         <property name="password" value="${jdbc.password}"/>
 
         <!--连接池的私有属性-->
-        <property name="maxPoolSize" value="30"/>
+        <property name="maxPoolSize" value="20"/>
         <property name="minPoolSize" value="10"/>
+        <property name="initialPoolSize" value="5"/>
+        <property name="maxIdleTime" value="1000"/>
         <!--关闭连接后不自动提交-->
         <property name="autoCommitOnClose" value="false"/>
         <!--获取连接超时时间-->

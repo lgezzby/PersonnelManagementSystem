@@ -6,9 +6,9 @@ package com.zjgsu.util.common;
  */
 public class HrmConstants {
     // 登录
-    private static final String LOGIN = "loginForm";
+    public static final String LOGIN = "loginForm";
     // 用户的session对象
-    private static final String USER_SESSION = "user_session";
+    public static final String USER_SESSION = "user_session";
     // 默认每页4条数据
-    private static final int PAGE_DEFAULT_SIZE = 4;
+    public static int PAGE_DEFAULT_SIZE = 4;
 }
