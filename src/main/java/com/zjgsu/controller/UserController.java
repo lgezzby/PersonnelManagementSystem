@@ -23,11 +23,7 @@ public class UserController {
     @Qualifier(value = "hrmService")
     private HrmService hrmService;
 
-    @RequestMapping("/loginForm")
-    public String loginForm(){
-        System.out.println("loginForm");
-        return "loginForm";
-    }
+
     /**
      * 处理登录请求
      * @param loginname
