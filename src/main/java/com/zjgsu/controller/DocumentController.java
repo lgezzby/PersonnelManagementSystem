@@ -92,12 +92,12 @@ public class DocumentController {
             // 1.服务器地址的file文件替换
             // 2.数据库中的filename更改过来
             // 上传文件
-            if (document.getFile() != null){
+            if (!document.getFile().isEmpty()){
                 // String path = session.getServletContext().getRealPath("/upload/");
                 String path = HrmConstants.UPLOAD_PATH;
                 String fileName = document.getFile().getOriginalFilename();
                 // 更新前先删除
-                FileUtils.forceDelete(new File(path + File.separator + fileName));
+//                FileUtils.forceDelete(new File(path + File.separator + fileName));
                 document.getFile().transferTo(new File(path + File.separator + fileName));
 
                 // 插入数据库
