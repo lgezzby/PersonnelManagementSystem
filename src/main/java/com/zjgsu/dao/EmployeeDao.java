@@ -12,7 +12,7 @@ import java.util.Map;
 public interface EmployeeDao {
     Integer count(@Param("param") Map<String,Object> params);
 
-    List<Employee> selectByPage(@Param("param") Map<String,Object> params);
+    List<Employee> selectByPage(@Param("params") Map<String,Object> params);
 
     void save(Employee employee);
 

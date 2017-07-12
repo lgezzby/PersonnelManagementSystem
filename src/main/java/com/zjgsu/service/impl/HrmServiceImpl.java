@@ -46,7 +46,6 @@ public class HrmServiceImpl implements HrmService{
         return userDao.selectById(id);
     }
 
-    // TODO 分页查询参数需要校正
     @Transactional(readOnly = true)
     public List<User> findUser(User user, PageModel pageModel) {
         Map<String,Object> params = new HashMap<String, Object>();
@@ -54,9 +53,10 @@ public class HrmServiceImpl implements HrmService{
         int recordCount = userDao.count(params);
         System.out.println("HrmServiceImpl findUser -- >>" + recordCount);
         pageModel.setRecordCount(recordCount);
-        if (recordCount > 0){
+        if (recordCount >= 0){
             /** 开始分页查询数据:查询第几页的数据 */
-            params.put("pageModel",pageModel);
+            params.put("firstLimitParam",(pageModel.getFirstLimitParam()<0?0:pageModel.getFirstLimitParam()));
+            params.put("pageSize",pageModel.getPageSize());
         }
         List<User> users = userDao.selectByPage(params);
         return users;
@@ -85,8 +85,10 @@ public class HrmServiceImpl implements HrmService{
         int recordCount = employeeDao.count(params);
         System.out.println("HrmServiceImpl findEmployee -- >>" + recordCount);
         pageModel.setRecordCount(recordCount);
-        if (recordCount > 0){
-            params.put("pageModel",pageModel);
+        if (recordCount >= 0){
+            /** 开始分页查询数据:查询第几页的数据 */
+            params.put("firstLimitParam",(pageModel.getFirstLimitParam()<0?0:pageModel.getFirstLimitParam()));
+            params.put("pageSize",pageModel.getPageSize());
         }
         List<Employee> employees = employeeDao.selectByPage(params);
         return employees;
@@ -121,8 +123,10 @@ public class HrmServiceImpl implements HrmService{
         int recordCount = deptDao.count(params);
         pageModel.setRecordCount(recordCount);
         System.out.println("HrmServiceImpl findDept -- >>" + recordCount);
-        if (recordCount > 0){
-            params.put("pageModel",pageModel);
+        if (recordCount >= 0){
+            /** 开始分页查询数据:查询第几页的数据 */
+            params.put("firstLimitParam",pageModel.getFirstLimitParam()<0?0:pageModel.getFirstLimitParam());
+            params.put("pageSize",pageModel.getPageSize());
         }
         List<Dept> depts = deptDao.selectByPage(params);
         return depts;
@@ -163,8 +167,10 @@ public class HrmServiceImpl implements HrmService{
         int recordCount = jobDao.count(params);
         pageModel.setRecordCount(recordCount);
         System.out.println("HrmServiceImpl findJob -- >>" + recordCount);
-        if (recordCount > 0){
-            params.put("pageModel",pageModel);
+        if (recordCount >= 0){
+            /** 开始分页查询数据:查询第几页的数据 */
+            params.put("firstLimitParam",pageModel.getFirstLimitParam()<0?0:pageModel.getFirstLimitParam());
+            params.put("pageSize",pageModel.getPageSize());
         }
         List<Job> jobs = jobDao.selectByPage(params);
         return jobs;

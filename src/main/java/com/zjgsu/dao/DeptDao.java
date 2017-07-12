@@ -18,7 +18,7 @@ public interface DeptDao {
 
     void update(@Param("dept") Dept dept);
 
-    List<Dept> selectByPage(@Param("param") Map<String,Object> params);
+    List<Dept> selectByPage(@Param("params") Map<String,Object> params);
 
     Integer count(@Param("param") Map<String,Object> params);
 

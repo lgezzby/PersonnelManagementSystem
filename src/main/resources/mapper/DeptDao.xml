@@ -32,7 +32,14 @@
     </update>
 
     <select id="selectByPage" parameterType="java.util.Map" resultType="Dept">
-        SELECT * FROM dept_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+        SELECT * FROM dept_inf
+        <where>
+            <if test="params.dept.name != null and !params.dept.name.equals('')">
+                <bind name="patternName" value="'%' + params.dept.name +'%'"/>
+                AND name LIKE #{patternName}
+            </if>
+        </where>
+        LIMIT #{params.firstLimitParam} , #{params.pageSize}
     </select>
 
     <select id="count" parameterType="java.util.Map" resultType="Integer">

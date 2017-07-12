@@ -39,8 +39,32 @@
         </where>
     </update>
 
-    <select id="selectByPage" parameterType="java.util.Map" resultType="Employee">
-        SELECT * FROM employee_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    <select id="selectByPage" parameterType="java.util.Map" resultMap="selectRetEmployee">
+        SELECT * FROM employee_inf
+        <where>
+            <if test="params.employee.job !=null and !params.employee.job.equals('')">
+                AND job_id = #{params.employee.job.id}
+            </if>
+            <if test="params.employee.name !=null and !params.employee.name.equals('')">
+                <bind name="patternName" value="'%' + params.employee.name + '%'" />
+                AND name LIKE #{patternName}
+            </if>
+            <if test="params.employee.cardId !=null and !params.employee.cardId.equals('')">
+                <bind name="patternCardId" value="'%' + params.employee.cardId + '%'" />
+                AND card_id LIKE #{patternCardId}
+            </if>
+            <if test="params.employee.sex !=null and !params.employee.sex.equals('0') and params.employee.sex != 0">
+                AND sex = #{params.employee.sex}
+            </if>
+            <if test="params.employee.phone !=null and !params.employee.phone.equals('')">
+                <bind name="patternPhone" value="'%' + params.employee.phone + '%'" />
+                AND phone LIKE #{patternPhone}
+            </if>
+            <if test="params.employee.dept !=null and !params.employee.dept.equals('')">
+                AND dept_id = #{params.employee.dept.id}
+            </if>
+        </where>
+        LIMIT #{params.firstLimitParam} , #{params.pageSize}
     </select>
 
     <select id="count" parameterType="java.util.Map" resultType="Integer">

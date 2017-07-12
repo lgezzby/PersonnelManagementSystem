@@ -48,11 +48,15 @@ public class UserController {
         }
     }
 
+    /**
+     * 处理查询请求
+     * @param pageIndex 被请求的是第几页
+     * @param model
+     * @param user
+     * @return
+     */
     @RequestMapping("/user/selectUser")
-    public String selectUser(Integer pageIndex,
-                             Model model,
-                             HttpSession httpSession){
-        User user = (User) httpSession.getAttribute(HrmConstants.USER_SESSION);
+    public String selectUser(Integer pageIndex, Model model,  User user){
         System.out.println("user = " + user);
         PageModel pageModel = new PageModel();
         if (pageIndex != null){
@@ -63,4 +67,55 @@ public class UserController {
         model.addAttribute("pageModel",pageModel);
         return "user/user";
     }
+
+    /**
+     * 处理删除用户请求
+     * @param ids   需要删除的id字符串
+     * @return
+     */
+    @RequestMapping("/user/removeUser")
+    public String removeUser(String ids){
+        String[] idArray = ids.split(",");
+        for (String id : idArray){
+            hrmService.removeUserById(Integer.parseInt(id));
+        }
+        return "redirect:/user/selectUser";
+    }
+
+    /**
+     * 处理修改用户请求
+     * @param flag  标记,1表示跳转到修改页面,2表示执行修改操作
+     * @param model
+     * @param user
+     * @return
+     */
+    @RequestMapping("/user/updateUser")
+    public String updateUser(String flag, Model model, User user){
+        if (flag.equals("1")){
+            User target = hrmService.findUserById(user.getId());
+            model.addAttribute("user",target);
+            return "user/showUpdateUser";
+        } else {
+            hrmService.modifyUser(user);
+            return  "redirect:/user/selectUser";
+        }
+    }
+
+    /**
+     * 处理添加请求
+     * @param flag
+     * @param user
+     * @return
+     */
+    @RequestMapping("/user/addUser")
+    public String addUser(String flag, User user){
+        if (flag.equals("1")){
+            return "user/showAddUser";
+        } else {
+            hrmService.addUser(user);
+            return "redirect:/user/selectUser";
+        }
+    }
+
+
 }

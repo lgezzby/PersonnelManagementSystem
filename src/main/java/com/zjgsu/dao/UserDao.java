@@ -20,7 +20,7 @@ public interface UserDao {
     void update(@Param("user") User user);
 
     // 动态查询
-    List<User> selectByPage(@Param("param") Map<String,Object> params);
+    List<User> selectByPage(@Param("params") Map<String,Object> params);
 
     // 根据参数查询用户总数
     Integer count(Map<String,Object> params);
