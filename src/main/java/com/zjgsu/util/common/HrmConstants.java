@@ -11,4 +11,6 @@ public class HrmConstants {
     public static final String USER_SESSION = "user_session";
     // 默认每页4条数据
     public static int PAGE_DEFAULT_SIZE = 4;
+    // 默认文件存储位置
+    public static final String UPLOAD_PATH = "E:/upload/";
 }

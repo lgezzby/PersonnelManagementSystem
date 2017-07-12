@@ -33,8 +33,15 @@
         </where>
     </update>
 
-    <select id="selectByPage" parameterType="java.util.Map" resultType="Document">
-        SELECT * FROM document_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    <select id="selectByPage" parameterType="java.util.Map" resultMap="selectRetDocument">
+        SELECT * FROM document_inf
+        <where>
+            <if test="params.document.title != null and !params.document.title.equals('')">
+                <bind name="patternTitle" value="'%' + params.document.title +'%'"/>
+                AND title LIKE #{patternTitle}
+            </if>
+        </where>
+        LIMIT #{params.firstLimitParam} , #{params.pageSize}
     </select>
 
     <select id="count" parameterType="java.util.Map" resultType="Integer">

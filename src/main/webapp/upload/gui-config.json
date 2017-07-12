@@ -1,0 +1,111 @@
+{
+  "configs": [
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS新加坡1",
+      "server": "sg1-1.bcoderss.com",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS新加坡2",
+      "server": "sg1-2.bcoderss.com",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS新加坡3",
+      "server": "sg1-3.bcoderss.com",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS新加坡4",
+      "server": "sg1-4.bcoderss.com",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS香港1",
+      "server": "hk1-1.bcoderss.com",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS美国1[故障维护]",
+      "server": "67.209.180.148",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS美国2",
+      "server": "104.224.166.90",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS美国3",
+      "server": "138.128.201.210",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS日本ip",
+      "server": "106.187.46.116",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS日本1,荷兰IP",
+      "server": "139.162.101.70",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS日本2,荷兰IP",
+      "server": "172.104.120.167",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS日本3,荷兰IP",
+      "server": "139.162.111.121",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS日本4,荷兰IP",
+      "server": "172.104.112.202",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS日本5,荷兰IP",
+      "server": "172.104.120.235",
+      "server_port": 6046
+    },
+    {
+      "method": "aes-256-cfb",
+      "password": "zhengboyi0508",
+      "remarks": "bcoderSS日本6,荷兰IP",
+      "server": "172.104.121.216",
+      "server_port": 6046
+    }
+  ],
+  "localPort": 1080,
+  "shareOverLan": false
+}

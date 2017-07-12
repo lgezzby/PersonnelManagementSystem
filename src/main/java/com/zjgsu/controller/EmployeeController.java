@@ -45,6 +45,47 @@ public class EmployeeController {
         return "employee/employee";
     }
 
+    @RequestMapping("/employee/addEmployee")
+    private String addEmployee(String flag, Integer job_id, Integer dept_id, Employee employee, Model model){
+        if (flag.equals("1")) {
+            List<Job> jobs = hrmService.findAllJob();
+            List<Dept> depts = hrmService.findAllDept();
+            model.addAttribute("jobs",jobs);
+            model.addAttribute("depts",depts);
+            return "employee/showAddEmployee";
+        } else {
+            this.genericAssociation(job_id,dept_id,employee);
+            hrmService.addEmployee(employee);
+            return "redirect:/employee/selectEmployee";
+        }
+    }
+
+    @RequestMapping("/employee/updateEmployee")
+    private String updateEmployee(String flag, Integer job_id, Integer dept_id, Employee employee, Model model){
+        if (flag.equals("1")){
+            Employee target = hrmService.findEmployeeById(employee.getId());
+            List<Job> jobs = hrmService.findAllJob();
+            List<Dept> depts = hrmService.findAllDept();
+            model.addAttribute("jobs",jobs);
+            model.addAttribute("depts",depts);
+            model.addAttribute("employee",target);
+            return "employee/showUpdateEmployee";
+        } else {
+            this.genericAssociation(job_id,dept_id,employee);
+            hrmService.modifyEmployee(employee);
+            return "redirect:/employee/selectEmployee";
+        }
+    }
+
+    @RequestMapping("/employee/removeEmployee")
+    private String removeEmployee(String ids){
+        String[] idArray = ids.split(",");
+        for (String s : idArray){
+            hrmService.removeEmployeeById(Integer.parseInt(s));
+        }
+        return "redirect:/employee/selectEmployee";
+    }
+
     private void genericAssociation(Integer job_id, Integer dept_id, Employee employee) {
         if (job_id != null && job_id != 0 && !job_id.equals("0")) {
             Job job = new Job();

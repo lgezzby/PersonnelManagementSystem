@@ -12,7 +12,7 @@ import java.util.Map;
 public interface NoticeDao {
     Integer count(@Param("param") Map<String,Object> params);
 
-    List<Notice> selectByPage(@Param("param") Map<String,Object> params);
+    List<Notice> selectByPage(@Param("params") Map<String,Object> params);
 
     void save(Notice notice);
 

@@ -73,7 +73,7 @@
 						<tr><td class="main_tdbor"></td></tr>
 						
 							<tr><td class="font3 fftd">文档：<br/>
-							<input type="file" name="file" id="file"  size="30"/>
+							<input type="file" name="file" id="file" size="30"/>
 						</td></tr>
 						<tr><td class="main_tdbor"></td></tr>
 						

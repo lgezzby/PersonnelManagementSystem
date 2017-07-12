@@ -157,8 +157,14 @@
             <if test= "dept != null">
                 dept_id=#{dept.id},
             </if >
+            <if test= "dept == null">
+                dept_id=1,
+            </if >
             <if test= "job != null">
                 job_id=#{job.id},
+            </if >
+            <if test= "job == null">
+                job_id=1,
             </if >
         </set>
     </sql>

@@ -211,8 +211,10 @@ public class HrmServiceImpl implements HrmService{
         int recordCount = noticeDao.count(params);
         pageModel.setRecordCount(recordCount);
         System.out.println("HrmServiceImpl findNotice -- >>" + recordCount);
-        if (recordCount > 0){
-            params.put("pageModel",pageModel);
+        if (recordCount >= 0){
+            /** 开始分页查询数据:查询第几页的数据 */
+            params.put("firstLimitParam",(pageModel.getFirstLimitParam()<0?0:pageModel.getFirstLimitParam()));
+            params.put("pageSize",pageModel.getPageSize());
         }
         List<Notice> notices = noticeDao.selectByPage(params);
         return notices;
@@ -247,8 +249,10 @@ public class HrmServiceImpl implements HrmService{
         int recordCount = documentDao.count(params);
         pageModel.setRecordCount(recordCount);
         System.out.println("HrmServiceImpl findDocument -- >>" + recordCount);
-        if (recordCount > 0){
-            params.put("pageModel",pageModel);
+        if (recordCount >= 0){
+            /** 开始分页查询数据:查询第几页的数据 */
+            params.put("firstLimitParam",(pageModel.getFirstLimitParam()<0?0:pageModel.getFirstLimitParam()));
+            params.put("pageSize",pageModel.getPageSize());
         }
         List<Document> documents = documentDao.selectByPage(params);
         return documents;

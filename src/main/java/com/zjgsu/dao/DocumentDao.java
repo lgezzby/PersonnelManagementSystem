@@ -12,7 +12,7 @@ import java.util.Map;
 public interface DocumentDao {
     Integer count(@Param("param") Map<String,Object> params);
 
-    List<Document> selectByPage(@Param("param") Map<String,Object> params);
+    List<Document> selectByPage(@Param("params") Map<String,Object> params);
 
     void save(Document document);
 

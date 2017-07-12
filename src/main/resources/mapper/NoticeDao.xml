@@ -33,8 +33,19 @@
         </where>
     </update>
 
-    <select id="selectByPage" parameterType="java.util.Map" resultType="Notice">
-        SELECT * FROM notice_inf LIMIT #{param.firstLimitPage} , #{param.pageSize}
+    <select id="selectByPage" parameterType="java.util.Map" resultMap="selectRetNotice">
+        SELECT * FROM notice_inf
+        <where>
+            <if test="params.notice.title != null and !params.notice.title.equals('')">
+                <bind name="patternTitle" value="'%' + params.notice.title +'%'"/>
+                AND title LIKE #{patternTitle}
+            </if>
+            <if test="params.notice.content != null and !params.notice.content.equals('')">
+                <bind name="patternContent" value="'%' + params.notice.content +'%'"/>
+                AND content LIKE #{patternContent}
+            </if>
+        </where>
+        LIMIT #{params.firstLimitParam} , #{params.pageSize}
     </select>
 
     <select id="count" parameterType="java.util.Map" resultType="Integer">
