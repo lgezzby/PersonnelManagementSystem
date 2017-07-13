@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
+ * 用户Controller
  * Created by zby on 2017/7/11.
  */
 @Controller
@@ -62,6 +63,8 @@ public class UserController {
         if (pageIndex != null){
             pageModel.setPageIndex(pageIndex);
         }
+        // 将查询内容继续填充到表格中
+        model.addAttribute("user",user);
         List<User> users = hrmService.findUser(user,pageModel);
         model.addAttribute("users",users);
         model.addAttribute("pageModel",pageModel);

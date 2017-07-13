@@ -29,6 +29,7 @@ public class JobController {
         if (pageIndex != null){
             pageModel.setPageIndex(pageIndex);
         }
+        model.addAttribute("job",job);
         List<Job> jobs = hrmService.findJob(job,pageModel);
         model.addAttribute("jobs",jobs);
         model.addAttribute("pageModel",pageModel);

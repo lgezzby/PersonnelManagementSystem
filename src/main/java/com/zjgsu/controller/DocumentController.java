@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
+ * 文档Controller
  * Created by zby on 2017/7/11.
  */
 @Controller
@@ -46,6 +47,7 @@ public class DocumentController {
         if (pageIndex != null){
             pageModel.setPageIndex(pageIndex);
         }
+        model.addAttribute("document",document);
         List<Document> documents = hrmService.findDocument(document,pageModel);
         model.addAttribute("documents",documents);
         model.addAttribute("pageModel",pageModel);

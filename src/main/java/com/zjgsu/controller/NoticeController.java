@@ -34,6 +34,7 @@ public class NoticeController {
         if (pageIndex != null){
             pageModel.setPageIndex(pageIndex);
         }
+        model.addAttribute("notice",notice);
         List<Notice> notices = hrmService.findNotice(notice,pageModel);
         model.addAttribute("notices",notices);
         model.addAttribute("pageModel",pageModel);

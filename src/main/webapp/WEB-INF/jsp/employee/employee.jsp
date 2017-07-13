@@ -96,8 +96,8 @@
 					    				<option value="${job.id }">${job.name }</option>
 					    			</c:forEach>
 					    		</select>
-					    	姓名：<input type="text" name="name">
-					    	身份证号码：<input type="text" name="cardId" maxlength="18">
+					    	姓名：<input type="text" name="name" value="${employee.name}">
+					    	身份证号码：<input type="text" name="cardId" maxlength="18" value="${employee.cardId}">
 					    </td>
 					  </tr>
 					  <tr>
@@ -108,7 +108,7 @@
 					    			<option value="1">男</option>
 					    			<option value="2">女</option>
 					    		</select>
-					    	手机：<input type="text" name="phone">
+					    	手机：<input type="text" name="phone" value="${employee.phone}">
 					    	所属部门：<select  name="dept_id" style="width:100px;">
 								   <option value="0">--部门选择--</option>
 								   <c:forEach items="${requestScope.depts }" var="dept">

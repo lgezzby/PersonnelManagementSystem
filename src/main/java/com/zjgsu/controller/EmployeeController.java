@@ -36,6 +36,7 @@ public class EmployeeController {
         List<Job> jobs = hrmService.findAllJob();
         List<Dept> depts = hrmService.findAllDept();
 
+        model.addAttribute("employee", employee);
         List<Employee> employees = hrmService.findEmployee(employee, pageModel);
 
         model.addAttribute("jobs", jobs);

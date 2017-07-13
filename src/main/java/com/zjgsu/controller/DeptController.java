@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 /**
+ * 部门Controller
  * Created by zby on 2017/7/11.
  */
 @Controller
@@ -34,6 +35,7 @@ public class DeptController {
         if (pageIndex != null){
             pageModel.setPageIndex(pageIndex);
         }
+        model.addAttribute("dept",dept);
         List<Dept> depts = hrmService.findDept(dept,pageModel);
         model.addAttribute("depts",depts);
         model.addAttribute("pageModel",pageModel);

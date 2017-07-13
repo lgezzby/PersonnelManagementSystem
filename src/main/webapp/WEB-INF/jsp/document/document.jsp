@@ -119,7 +119,7 @@
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
-					    	标题：<input type="text" name="title" />
+					    	标题：<input type="text" name="title" value="${document.title}"/>
 					    	<input type="submit"  value="搜索"/>
 					    	<input type="button" id="delete" value="删除">
 					    </td>
