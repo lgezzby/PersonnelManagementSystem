@@ -26,7 +26,6 @@ public class NoticeController {
      * @param notice
      * @return
      */
-    // TODO 查询时点击下一页 参数不会传递过来
     @RequestMapping("/notice/selectNotice")
     private String selectNotice(Integer pageIndex, Model model, Notice notice){
         System.out.println("notice = " + notice);

@@ -39,7 +39,6 @@ public class DocumentController {
      * @param document
      * @return
      */
-    // TODO 查询时点击下一页 参数不会传递过来
     @RequestMapping("/document/selectDocument")
     private String selectDocuemnt(Integer pageIndex, Model model, Document document){
         System.out.println("document = " + document);

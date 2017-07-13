@@ -27,7 +27,6 @@ public class DeptController {
      * @param dept
      * @return
      */
-    // TODO 查询时点击下一页 参数不会传递过来
     @RequestMapping("/dept/selectDept")
     private String selectDept(Integer pageIndex, Model model, Dept dept){
         System.out.println("dept = " + dept);

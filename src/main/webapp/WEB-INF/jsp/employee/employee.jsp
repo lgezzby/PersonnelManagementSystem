@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -87,13 +88,15 @@
 			  <td class="fftd">
 			  	<form name="empform" method="post" id="empform" action="${ctx}/employee/selectEmployee">
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<%--<form:hidden path="employee.job.id"/>
+						<form:hidden path="employee.sex"/>--%>
 					  <tr>
 					    <td class="font3">
 					    	职位：
 							    <select name="job_id" style="width:143px;">
 					    			<option value="0">--请选择职位--</option>
 					    			<c:forEach items="${requestScope.jobs }" var="job">
-					    				<option value="${job.id }">${job.name }</option>
+					    				<option value="${job.id }" <c:if test="${job.id == employee.job.id}">selected</c:if> >${job.name }</option>
 					    			</c:forEach>
 					    		</select>
 					    	姓名：<input type="text" name="name" value="${employee.name}">
@@ -104,15 +107,15 @@
 					    <td class="font3">
 					    	性别：
 					    		<select name="sex" style="width:143px;">
-					    			<option value="0">--请选择性别--</option>
-					    			<option value="1">男</option>
-					    			<option value="2">女</option>
+									<option value="0" <c:if test="${employee.sex == 0}" >selected</c:if> >--请选择性别--</option>
+					    			<option value="1" <c:if test="${employee.sex == 1}" >selected</c:if> >男</option>
+					    			<option value="2" <c:if test="${employee.sex == 2}" >selected</c:if> >女</option>
 					    		</select>
 					    	手机：<input type="text" name="phone" value="${employee.phone}">
 					    	所属部门：<select  name="dept_id" style="width:100px;">
 								   <option value="0">--部门选择--</option>
 								   <c:forEach items="${requestScope.depts }" var="dept">
-					    				<option value="${dept.id }">${dept.name }</option>
+					    				<option value="${dept.id }" <c:if test="${dept.id == employee.dept.id}">selected</c:if> >${dept.name }</option>
 					    			</c:forEach>
 							</select>&nbsp;
 					    	<input type="submit" value="搜索"/>

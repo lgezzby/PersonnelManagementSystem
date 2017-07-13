@@ -21,7 +21,6 @@ public class JobController {
     @Qualifier("hrmService")
     private HrmService hrmService;
 
-    // TODO 查询时点击下一页 参数不会传递过来
     @RequestMapping("/job/selectJob")
     private String selectJob(Integer pageIndex, Model model, Job job){
         System.out.println("job = " + job);
