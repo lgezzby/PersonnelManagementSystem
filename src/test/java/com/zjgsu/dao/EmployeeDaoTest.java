@@ -1,6 +1,5 @@
 package com.zjgsu.dao;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import com.zjgsu.entity.Dept;
 import com.zjgsu.entity.Employee;
 import com.zjgsu.entity.Job;
@@ -15,8 +14,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zby on 2017/7/9.
